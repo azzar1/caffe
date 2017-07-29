@@ -407,6 +407,7 @@ message LayerParameter {
   optional WindowDataParameter window_data_param = 129;
 
   optional ReverseParameter reverse_param=8266709;
+  optional TransposeParameter transpose_param=8266710;
 }
 
 // Message that stores parameters used to apply transformation
@@ -1415,4 +1416,12 @@ message PReLUParameter {
 
 message ReverseParameter {
   optional int32 axis=1 [default=0];
+}
+
+message TransposeParameter {
+  // For example, if you want to transpose NxCxHxW into WxNxHxC, 
+  // the parameter should be the following:
+  // transpose_param { dim: 3 dim: 0 dim: 2 dim: 1 }
+  // ie, if the i-th dim has value n, then the i-th axis of top is equal to the n-th axis of bottom.
+  repeated int32 dim=1;
 }
